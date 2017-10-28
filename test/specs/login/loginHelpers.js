@@ -2,10 +2,14 @@ module.exports = {
   login(email, password) {
     browser.click(".navbar [data-target='#loginModal']");
     browser.waitForVisible(".modal-body [name='email']");
-    browser.setValue(".modal-body [name='email']", email);
-    browser.setValue(".modal-body [name='password']", password);
-    browser.click(".modal-footer [value='Sign In']");
-    browser.waitForText("a.nav-link[data-toggle='dropdown']");
+    if (email && password) {
+      browser.setValue(".modal-body [name='email']", email);
+      browser.setValue(".modal-body [name='password']", password);
+      browser.click(".modal-footer [value='Sign In']");
+      browser.waitForText("a.nav-link[data-toggle='dropdown']");
+    } else {
+      browser.click(".modal-footer [value='Sign In']");
+    }
   },
   logout() {
     browser.click("a.nav-link[data-toggle='dropdown']");

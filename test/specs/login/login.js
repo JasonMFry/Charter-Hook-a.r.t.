@@ -7,6 +7,13 @@ beforeAll(() => {
 });
 
 describe('Basic login/logout functionality', () => {
+  it('displays an alert when incorrect login credentials are provided.', () => {
+    loginHelpers.login();
+    const alertTextFromSite = browser.getText(".alert-info");
+    const match = alertTextFromSite.includes('Please provide an email and password.');
+    assert.equal(match, true);
+  });
+
   it('logs in given correct credentials', () => {
     const email = creds.normalCustomer.email
     const password = creds.normalCustomer.password;
